@@ -1,5 +1,5 @@
 """
-Docstring for Lab0205-Student-Grp
+Docstring for Ex.0201-InfixToPostfixV1
 """
 
 class ArrayStack:
@@ -52,20 +52,20 @@ class ArrayStack:
         """just print"""
         print(self.data)
 
-def grouping(m, n):
-    DATA_STACK = ArrayStack()
-    Group = ArrayStack()
-    for _ in range(n):
-        DATA_STACK.push(input())
-    # print(DATA_STACK.data)
-
-    for _ in range(m):
-        Group.push([])
-
-    for i in range(n):
-        Group.data[int(i%m)].append(DATA_STACK.pop())
-
-    for j in range(1,m+1): # PRINTING OUTPUT
-        name_list = str((Group.data[j-1])).replace("[","").replace("]","").replace("\'","")
-        print(f"Group {j}: {name_list}")
-grouping(int(input("Enter numbers of group: ")), int(input("Enter numbers of student: ")))
+def infixToPostfix(expression):
+    expression = expression.replace(" ", "")
+    STACK = ArrayStack()
+    Postfix = ArrayStack()
+    for i in expression:
+        if i in ('*','/','+','-'):
+            if not STACK.is_empty():
+                if i in ('+','-') and STACK.get_stack_top() in ('*','/'):
+                    for i in range(STACK.size):
+                        Postfix.push(STACK.pop())
+            else:
+                STACK.push(i)
+        else:
+            Postfix.push(i)
+    print(Postfix)
+    STACK.print_stack()
+infixToPostfix(input())
