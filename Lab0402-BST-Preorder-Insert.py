@@ -32,22 +32,46 @@ class BST:
     def set_root(self, root):
         self.root = root
         out = self.root
-        print(out.data)
     
     def insert(self, data):
         new_bstNode = BSTNode(data)
         current = self.root
+        value = int(data)
+        
+        if current == None :
+            self.set_root(new_bstNode)
+            return
 
-        print(self.root)
+        while True:
+            if value < int(current.get_data()):
+                if current.get_left() == None:
+                    current.set_left(new_bstNode)
+                    break
+                else:
+                    current = current.get_left()
+            else:
+                if current.get_right() == None:
+                    current.set_right(new_bstNode)
+                    break
+                else:
+                    current = current.get_right()
+    def preorder(self):
+        self._preorder_recursive(self.root)
+
+    def _preorder_recursive(self, node):
+        if node == None:
+            return
+        
+        print(f"->", node.get_data(), end=" ")
+        self._preorder_recursive(node.get_left())
+        self._preorder_recursive(node.get_right())
 
 def main():
-    bst = BST()
-    data1 = BSTNode(5)
-    data2 = BSTNode(10)
-    data3 = BSTNode(6)
-    bst.set_root(data1)
-    
-    # bst.insert(data1)
-    # bst.insert(data2)
-    # bst.insert(data3)
+    my_bst = BST()
+    for i in range(int(input())):
+        my_bst.insert(int(input()))
+
+    print("Preorder: ", end="")
+    my_bst.preorder()
+
 main()

@@ -1,5 +1,5 @@
 """
-Docstring for Lab0402-BST-Preorder-Insert
+Docstring for Lab0403-BST-Traverse
 """
 
 class BSTNode:
@@ -106,7 +106,6 @@ def main():
     my_bst = BST()
     for i in range(int(input())):
         my_bst.insert(int(input()))
-    print(my_bst.is_empty())
     my_bst.traverse()
 
 main()
